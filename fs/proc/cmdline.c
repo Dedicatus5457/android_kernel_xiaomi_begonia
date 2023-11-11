@@ -80,10 +80,10 @@ static void patch_begonia_cmdline(char *cmdline)
 		append_cmdline(cmdline, "androidboot.product.hardware.sku=begonia");
 	}
 
-	// Thank you Xiaomi, very cool
-	if(check_flag(cmdline, "androidboot.selinux=", "permissive")) {
+	/* For testing only */
+	if(check_flag(cmdline, "androidboot.selinux=", "enforcing")) {
 		remove_flag(cmdline, "androidboot.selinux=");
-		append_cmdline(cmdline, "androidboot.selinux=enforcing");
+		append_cmdline(cmdline, "androidboot.selinux=permissive");
 	}
 }
 #endif
