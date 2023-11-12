@@ -2230,7 +2230,7 @@ int f2fs_quota_sync(struct super_block *sb, int type)
 	 */
 	f2fs_lock_op(sbi);
 
-	f2fs_down_read(&sbi->quota_sem);
+	down_read(&sbi->quota_sem);
 	ret = dquot_writeback_dquots(sb, type);
 	if (ret)
 		goto out;
@@ -2268,7 +2268,7 @@ int f2fs_quota_sync(struct super_block *sb, int type)
 out:
 	if (ret)
 		set_sbi_flag(F2FS_SB(sb), SBI_QUOTA_NEED_REPAIR);
-	f2fs_up_read(&sbi->quota_sem);
+	up_read(&sbi->quota_sem);
 	f2fs_unlock_op(sbi);
 	return ret;
 }
